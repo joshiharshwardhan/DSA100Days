@@ -1,0 +1,22 @@
+string read(int n, vector<int> book, int target)
+{
+    // Write your code here.
+    int s = 0;
+    int e = book.size()-1;
+    sort(book.begin(),book.end());
+    while(s<=e)
+    {
+        if(book[s]+book[e]==target)
+        {
+            return "YES";
+        }
+        else if(book[s]+book[e]>target)
+        {
+            e--;
+        }
+        else{
+            s++;
+        }
+    }
+    return "NO";
+}
