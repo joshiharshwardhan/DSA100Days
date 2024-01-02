@@ -1,0 +1,16 @@
+int Solution::solve(vector<int> &A, int B) {
+    map<int,int>mp;
+    int n = A.size();
+    int cnt = 0;
+    int xsum = 0;
+    mp[xsum]++;
+    for(int i=0;i<n;i++)
+    {
+        xsum = xsum^A[i];
+        int x = xsum^B;
+        cnt+=mp[x];
+        mp[xsum]++;
+        
+    }
+    return cnt;
+}
