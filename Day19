@@ -1,0 +1,81 @@
+class Solution {
+public:
+    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+        ListNode*pt1 = l1;
+        ListNode*pt2 = l2;
+        ListNode*ptr = new ListNode(0);
+        ListNode*newhead = ptr;
+        int carry = 0;
+        while(pt1!=NULL&&pt2!=NULL)
+        {
+            int sum = pt1->val+pt2->val+carry;
+            if(sum<10)
+            {
+                ListNode*node = new ListNode(sum);
+                carry = sum/10;
+                ptr->next = node;
+                ptr = ptr->next;
+            }
+            else{
+                carry = sum/10;
+                int ans = sum%10;
+                ListNode*node = new ListNode(ans);
+                ptr->next = node;
+                ptr = ptr->next;
+            }
+            pt1 = pt1->next;
+            pt2 = pt2->next;
+        }
+        while(pt1!=NULL)
+        {
+            int sum = pt1->val+carry;
+            if(sum<10)
+            {
+                ListNode*node = new ListNode(sum);
+                carry = sum/10;
+                ptr->next = node;
+                ptr = ptr->next;
+
+            }
+            else{
+                carry = sum/10;
+                int ans = sum%10;
+                ListNode*node = new ListNode(ans);
+                ptr->next = node;
+                ptr = ptr->next;
+            }
+            pt1 = pt1->next;
+
+        }
+        while(pt2!=NULL)
+        {
+            int sum = pt2->val+carry;
+            if(sum<10)
+            {
+                ListNode*node = new ListNode(sum);
+                carry = sum/10;
+                ptr->next = node;
+                ptr = ptr->next;
+
+            }
+            else{
+                carry = sum/10;
+                int ans = sum%10;
+                ListNode*node = new ListNode(ans);
+                ptr->next = node;
+                ptr = ptr->next;
+            }
+            pt2 = pt2->next;
+        }
+        if(pt1==NULL&&pt2==NULL&&carry!=0)
+        {
+            int sum = carry;
+            ListNode*node = new ListNode(sum);
+            ptr->next = node;
+            ptr = ptr->next;
+        }
+
+        return newhead->next;
+
+    }
+};
