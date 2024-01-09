@@ -1,0 +1,38 @@
+class Solution {
+public:
+    vector<int> countleaves(TreeNode*root)
+    {
+        
+        vector<int>ans;
+        if(root==NULL)
+        {
+            return ans;
+        }
+        if(root->left==NULL&&root->right==NULL)
+        {
+            ans.push_back(root->val);
+        }
+        vector<int>leftleaves = countleaves(root->left);
+        ans.insert(ans.end(),leftleaves.begin(),leftleaves.end());
+        vector<int>rightleaves = countleaves(root->right);
+        ans.insert(ans.end(),rightleaves.begin(),rightleaves.end());
+        
+
+        return ans;
+        
+        
+
+    }
+    bool leafSimilar(TreeNode* root1, TreeNode* root2) {
+        if(root1==NULL||root2==NULL)
+        {
+            return false;
+        }
+        vector<int>arr1 = countleaves(root1);
+        vector<int>arr2 = countleaves(root2);
+
+        
+        return arr1==arr2;
+        
+    }
+};
