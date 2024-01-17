@@ -1,0 +1,21 @@
+int trap(vector<int>& height) {
+        int trappedwater = 0;
+        int n = height.size();
+        for(int i=1;i<n;i++)
+        {
+            int leftMax = height[i];
+            for(int j=0;j<i;j++)
+            {
+                leftMax = max(leftMax,height[j]);
+            }
+            int rightMax = height[i];
+            for(int k = i;k<n;k++)
+            {
+                rightMax = max(rightMax,height[k]);
+            }
+            trappedwater = trappedwater+min(leftMax,rightMax)-height[i];
+
+
+        }
+        return trappedwater;
+    }
