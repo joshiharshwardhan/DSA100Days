@@ -1,0 +1,32 @@
+bool isParentSum(Node *root){
+    // Write your code here.
+    if(root==NULL)
+    {
+        return true;
+    }
+    
+    bool leftsum = isParentSum(root->left);
+    bool rightsum = isParentSum(root->right);
+    int sum = 0;
+    if(root->left==NULL&&root->right==NULL)
+    {
+        return true;
+    }
+    if(root->left==NULL)
+    {
+        
+        sum = sum+root->right->data+0;
+    }
+    else if(root->right==NULL)
+    {
+        
+        sum = sum+0+root->left->data;
+    }
+    else{
+        sum+=root->left->data+root->right->data;
+
+    }
+    
+    return leftsum&&rightsum&&sum==root->data;
+
+}
