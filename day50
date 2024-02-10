@@ -1,0 +1,35 @@
+void getsubset(vector<int>&arr,int n,vector<vector<int>>&subset,int index,vector<int>&temp)
+    {
+        if(index>=n)
+        {
+            subset.push_back(temp);
+            return;
+        }
+        temp.push_back(arr[index]);
+        getsubset(arr,n,subset,index+1,temp);
+        temp.pop_back();
+        getsubset(arr,n,subset,index+1,temp);
+    }
+    vector<int> subsetSums(vector<int> arr, int N)
+    {
+        // Write Your Code here
+        vector<vector<int>>subset;
+        vector<int>temp;
+        getsubset(arr,N,subset,0,temp);
+        int size = subset.size();
+        vector<int>ans;
+        for(int i=0;i<size;i++)
+        {
+            int sum = 0;
+            for(int j=0;j<subset[i].size();j++)
+            {
+                sum+=subset[i][j];
+                
+            }
+            ans.push_back(sum);
+            
+            
+        }
+        return ans;
+        
+    }
