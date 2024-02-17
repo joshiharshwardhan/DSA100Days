@@ -1,0 +1,33 @@
+bool comp(pair<int,int>&a,pair<int,int>&b)
+{
+    double d1 = (double)a.second/(double)a.first;
+    double d2 = (double)b.second/(double)b.first;
+    return d1>d2;
+}
+double maximumValue (vector<pair<int, int>>& items, int n, int w)
+{
+    // Write your code here.
+    // ITEMS contains {weight, value} pairs.
+    sort(items.begin(),items.end(),comp);
+    double ans = 0;
+    for(int i=0;i<n;i++)
+    {
+        if(w==0)
+        {
+            break;
+        }
+        if(items[i].first<=w)
+        {
+            ans+=(double)items[i].second;
+            w-=items[i].first;
+        }
+        else{
+            double vw = (double)items[i].second/items[i].first;
+            ans+=vw*w;
+            w = 0;
+        }
+
+    }
+    return ans;
+
+}
