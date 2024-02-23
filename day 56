@@ -1,0 +1,43 @@
+class Solution {
+public:
+    void solve(vector<int>&candidates,int target,vector<int>&temp,vector<vector<int>>&store,int index)
+    {
+        if(index>=candidates.size())
+        {
+            if(target==0)
+            {
+                if(find(store.begin(),store.end(),temp)==store.end())
+                {
+                    store.push_back(temp);
+                }
+                
+                
+            }
+            
+            return;
+            
+        }
+        
+        // leave
+        solve(candidates,target,temp,store,index+1);
+        // pick 
+        if(target>=candidates[index])
+        {
+            temp.push_back(candidates[index]);
+            solve(candidates,target-candidates[index],temp,store,index);
+            temp.pop_back();
+        }
+        
+       
+
+
+    }
+    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+        vector<vector<int>>store;
+        vector<int>temp;
+        int index = 0;
+        solve(candidates,target, temp,store,index);
+        return store;
+
+    }
+};
