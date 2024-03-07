@@ -1,0 +1,33 @@
+#include <bits/stdc++.h> 
+void solve(string s,vector<string>&dictionary,string str,vector<string>&ans,int index)
+{
+    if(index==s.size())
+    {
+        ans.push_back(str);
+        return ;
+    }
+    
+    for(int i=index;i<s.size();i++)
+    {
+        string sub = s.substr(index,i-index+1);
+        if(find(dictionary.begin(),dictionary.end(),sub)!=dictionary.end())
+        {
+            solve(s,dictionary,str+sub+' ',ans,i+1); // when we found a word in the dictionary then we will insert 
+            // that word into str with a space which ensures spacing between two words and will move 
+            // to i +1 checking for the next word 
+        }
+
+
+        
+    }
+
+}
+vector<string> wordBreak(string &s, vector<string> &dictionary)
+{
+    // Write your code here
+    string str = "";
+    vector<string>ans;
+    solve(s,dictionary,str,ans,0);
+    return ans;
+
+}
