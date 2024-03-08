@@ -1,0 +1,29 @@
+int solve(int ind,vector<int>&dp,int k,vector<int>&height)
+{
+    if(ind==0)
+    {
+        return 0;
+    }
+    if(dp[ind]!=-1)
+    {
+        return dp[ind];
+    }
+    int i = 1;
+    int mini = INT_MAX;
+    while(i<=k&&ind-i>=0 )
+    {
+        int fs = solve(ind-i, dp, k, height)+abs(height[ind]-height[ind-i]);
+        mini = min(mini,fs);
+        
+        i++;
+    }
+    return dp[ind] = mini;
+}
+
+int minimizeCost(int n, int k, vector<int> &height){
+    // Write your code here.
+    int ind = n-1;
+    vector<int>dp(n,-1);
+    int ans = solve(ind,dp,k,height);
+    return ans;
+}
