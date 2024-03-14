@@ -1,0 +1,22 @@
+#include <bits/stdc++.h>
+int minimumRotations(int n, string s) {
+  // Write your code here
+  int count = 0;
+  for (int i = 1; i < n-1; i++)
+  {
+    string substr1 = s.substr(0,i);
+    string substr2 = s.substr(i,n-i);
+    if(substr2+substr1==s)
+    {
+      count = i;
+      break;
+    }
+  }
+  if(count==0)
+  {
+    return n;
+  }
+  else{
+    return count;
+  }
+}
