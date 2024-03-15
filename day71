@@ -1,0 +1,36 @@
+class Solution
+{
+    public:
+    //Function is to check whether two strings are anagram of each other or not.
+    bool isAnagram(string a, string b){
+        
+        // Your code here
+        if(a.size()!=b.size())
+        {
+            return false;
+        }
+        map<char,int>mpp1;
+        map<char,int>mpp2;
+        for(int i=0;i<a.size();i++)
+        {
+            mpp1[a[i]]++;
+        }
+        for(int j=0;j<b.size();j++)
+        {
+            mpp2[b[j]]++;
+        }
+        for(int i=0;i<a.size();i++)
+        {
+            if(mpp1[a[i]]!=mpp2[a[i]])
+            {
+                return false;
+            }
+            if(mpp1[b[i]]!=mpp2[b[i]])
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+}; 
