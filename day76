@@ -1,0 +1,38 @@
+#include <bits/stdc++.h> 
+int f(int row,int col,vector<vector<int>>&matrix,vector<vector<int>>&dp,int m)
+{
+    if(col<0||col>=m)
+    {
+        return -1e9;
+    }
+    if(row==0)
+    {
+        return matrix[0][col];
+    }
+    if(dp[row][col]!=-1)
+    {
+        return dp[row][col];
+    }
+    
+    int up = matrix[row][col]+f(row-1,col,matrix,dp,m);
+    int leftdig = matrix[row][col]+f(row-1, col-1, matrix, dp, m);
+    int rightdig = matrix[row][col]+f(row-1, col+1, matrix, dp, m);
+    return dp[row][col] = max(up,max(leftdig,rightdig));
+    
+    
+}
+int getMaxPathSum(vector<vector<int>> &matrix)
+{
+    //  Write your code here.
+    int n = matrix.size();
+    int m = matrix[0].size();
+    int ans = INT_MIN;
+    vector<vector<int>>dp(n,vector<int>(m,-1));
+    for(int i=0;i<m;i++)
+    {
+        int sum = f(n-1,i,matrix,dp,m);
+        ans = max(ans,sum);
+
+    }
+    return ans;
+}
