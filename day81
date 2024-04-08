@@ -1,0 +1,47 @@
+#include <bits/stdc++.h> 
+int mod = 1e9+7;
+int f(vector<int>&arr,int k,int d,int n,int ind,vector<vector<int>>&dp)
+{
+    
+    if(ind==0)
+    {
+        if(k==0&&arr[ind]==0)
+        {
+            return 2;
+        }
+        if(k==0||arr[ind]==k)
+        {
+            return 1;
+        }
+        return 0;
+    }
+    if(dp[ind][k]!=-1)
+    {
+        return dp[ind][k];
+    }
+    int nopick = f(arr, k, d, n, ind-1,dp);
+    int pick = 0;
+    if(arr[ind]<=k)
+    {
+        pick = f(arr, k-arr[ind], d, n, ind-1,dp);
+    }
+    return dp[ind][k] = (pick+nopick)%mod;
+}
+int countPartitions(int n, int d, vector<int> &arr) {
+    // Write your code here.
+    int sum= 0;
+    for(int i=0;i<n;i++)
+    {
+        sum+=arr[i];
+    }
+    int k = (sum-d)/2;
+    if((sum-d)%2==1||sum-d<0)
+    {
+        return 0;
+    }
+    vector<vector<int>>dp(n,vector<int>(k+1,-1));
+    int ans = f(arr,k,d,n,n-1,dp);
+    return ans;
+}
+
+
